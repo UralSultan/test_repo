@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course</title>
+</head>
+<body>
+    <style>
+    .course_adding {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    .course_list {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    </style>
+    <div class="course_adding">
+        <form method="post">
+            <h1>Add course</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create Course</button>
+        </form>
+    </div>
+    <div class="course_list">
+        <h1>Course list</h1>
+        {% for course in courses %}
+            <p>Course name: {{ course.name }}<p/>
+            <p>In school: {{ course.school }}<p/>
+            {% if course.is_active == True %}
+                <p>Course active</p>
+            {% else %}
+                <p>Course not active</p>
+            {% endif %}
+<!--                    <p>Is active: {{ course.is_active }}<p/>-->
+            <p>Price of course: {{ course.price }}<p/>
+            <p>Maximum student in course: {{ course.max_student }}<p/>
+            <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+venv
+.idea
+idea/workspace.xml
+__pycache__
+media
+db.sqlite3
+.env
+student_avg_score.csv
+student_score.csv
+student_score1.csv
+text1.json

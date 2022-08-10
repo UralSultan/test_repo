@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>student course</title>
+</head>
+<body>
+    <style>
+    .student_adding_form {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    .student_list {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    </style>
+    <div class="student_adding_form"><form method="post">
+        <h1>Add student</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add student</button>
+    </div>    </form>
+    <div class="student_list">
+        <h1>Students list</h1>
+        {% for student in students %}
+            <p>{{ student.student }}<p/>
+            <p>{{ student.course }}<p/>
+            <p>{{ student.course.school }}<p/>
+            <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

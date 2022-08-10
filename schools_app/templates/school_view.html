@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>School</title>
+</head>
+<body>
+    <style>
+    .adding_school {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    .school_list {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+    </style>
+    <div class="adding_school"><form method="post">
+            <h1>Add school</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create School</button>
+        </form>
+    </div>
+    <div class="school_list">
+        <h1>School list</h1>
+        {% for s in schools %}
+            <p>{{ s.name }}<p/>
+            <p>{{ s.address }}<p/>
+            <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

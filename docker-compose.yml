@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+#    pip install gunicorn
+#    command: gunicorn school.wsgi -b 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    links:
+      - redis
+    depends_on:
+      - db
+      - celery
+
+  db:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_school_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    container_name: school_postgres
+
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6378:6379"
+
+  celery:
+    build: .
+    command: celery -A school worker -l info -B --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/usr/src/app/
+    links:
+      - redis
+"""
+  нужно изучить
+  nginx:
+    pass
+"""
+volumes:
+  postgres_school_data: {}
